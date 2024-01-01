@@ -1,0 +1,3 @@
+D:/User/Documents/prects/cpp/Start/out/build/x64-Debug/CMakeFiles/Start.dir
+D:/User/Documents/prects/cpp/Start/out/build/x64-Debug/CMakeFiles/edit_cache.dir
+D:/User/Documents/prects/cpp/Start/out/build/x64-Debug/CMakeFiles/rebuild_cache.dir

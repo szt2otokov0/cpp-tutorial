@@ -9,46 +9,62 @@ template <typename T>
 class stack
 {
 public:
-	stack() = default;
+	explicit stack(const int size)
+	{
+		arr_ = new T[size];
+		size_ = size;
+	}
 
 	void push(T item)
 	{
-		T* new_arr = new T[size()+1];
-		new_arr[size()] = item;
+		T* new_arr = new T[size_+1];
+		for(int i = 0;i < size_;i++)
+		{
+			new_arr[i] = arr_[i];
+		}
+		new_arr[size_] = item;
 		delete[] arr_;
 		arr_ = new_arr;
+		size_++;
+		print_all();
 	}
 
 	T pop()
 	{
 		if(is_empty()) return T();
-		T* new_arr = new T[size()-1];
-		T* item = &arr_[size()-1];
-		for(int i = 1; i < size()-1;i++)
+		T* new_arr = new T[size_-1];
+		T item = arr_[size_-1];
+		for(int i = 1; i < size_-1;i++)
 		{
 			new_arr[i-1] = arr_[i];
 		}
 		delete[] arr_;
 		arr_ = new_arr;
-		return *item;
+		size_--;
+		print_all();
+		return item;
 	}
 
 	T peek()
 	{
-		if(is_empty()) return def_;
-		T* item = &arr_[size()-1];
-		return *item;
+		if(is_empty()) return def;
+		T item = arr_[size_-1];
+		return item;
 	}
 
-	bool is_empty()
+	bool is_empty() const
 	{
-		return size() == 0;
+		return size_ < 1;
 	}
 
-	int size()
+	void print_all()
 	{
-		T arr = *arr_;
-		return arr.size();
+		cout << "--------------" << '\n';
+		for(int i = 0; i< size_;i++)
+		{
+			cout << arr_[i] << '\n';
+		}
+		cout << "--------------" << '\n';
 	}
 
 	~stack()
@@ -58,15 +74,29 @@ public:
 
 private:
 	T* arr_;
-	static T def_;
+	int size_;
+	static const T def = {};
 };
 
 int main()
 {
-	auto ints = stack<int>();
+	cout << "program works" << '\n';
+	auto ints = stack<int>(1);
+	cout << "creation works" << '\n';
 	ints.push(34);
 	ints.push(44);
+	ints.push(69);
+	cout << "push works" << '\n';
 	cout << ints.pop() << '\n';
-	cout << ints.peek() << '\n';
+	cout << "pop works" << '\n';
+	//cout << ints.peek() << '\n';
+	//cout << "peek works" << '\n';
+	cout << ints.pop() << '\n';
+	cout << "Everything works?" << '\n';
+
+	char b;
+
+	(void)scanf_s(&b);
+
 	return 0;
 }
